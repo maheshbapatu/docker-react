@@ -1,0 +1,17 @@
+# Use an existing docker image as a base
+FROM node:alpine
+
+WORKDIR '/app'
+
+# Copy files that contains dependencies and are required for npm to get installed. 
+# If we copy all the files at this point you have to rebuild the entire image each 
+# and every time you make a change in your source code
+
+COPY package.json .
+
+RUN npm install
+
+COPY . .
+
+CMD ["npm","run","start"]
+
