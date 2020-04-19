@@ -1,0 +1,14 @@
+# Telling the travis the pre requirements through this file
+
+# Sudo permission for the docker is required.
+# Before our tests run we have to build our docker image
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t maheshbapatur/docker-react -f Dockerfile.dev .
+# handling failed builds
+script:
+  - docker run maheshbapatur/docker-react npm run test -- --coverage
+
